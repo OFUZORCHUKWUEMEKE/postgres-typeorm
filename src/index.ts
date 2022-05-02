@@ -1,4 +1,5 @@
 import { DataSource} from 'typeorm'
+import { Client } from './Entitites/Client'
 
 
 const AppDataSource = new DataSource({
@@ -8,8 +9,9 @@ const AppDataSource = new DataSource({
     username: "postgres",
     password: "ofuzor2001",
     database: "test",
+    entities:[Client], 
     // entities: [Photo],
-    // synchronize: true,
+    synchronize: true 
     // logging: false,
 })
 
@@ -18,4 +20,4 @@ AppDataSource.initialize()
         // here you can start to work with your database
         console.log('database running on port 2000')
     })
-.catch((error) => console.log('unable to connect to postgress'))
+.catch((error) => console.log(error))

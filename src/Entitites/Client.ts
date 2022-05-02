@@ -1,7 +1,10 @@
-import { Entity,Column,BaseEntity } from "typeorm";
+import { Entity,Column,BaseEntity,PrimaryColumn,CreateDateColumn,UpdateDateColumn } from "typeorm";
 
 @Entity('client')
 export class Client extends BaseEntity  {
+
+    @PrimaryColumn()
+    id:number
 
    @Column()
    firstname:string;
@@ -38,8 +41,16 @@ export class Client extends BaseEntity  {
        age:number,
        hairColor:string
    }
-   @Column()
+   @Column({
+       type:'simple-array',
+       default:[]
+   })
    familyMembers:string[]
+   @UpdateDateColumn()
+   updatedAt:Date
+
+   @CreateDateColumn()
+   createdAt:Date
    
 
 

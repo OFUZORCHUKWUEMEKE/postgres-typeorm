@@ -30,8 +30,19 @@ export class Client extends BaseEntity  {
        name:'active'
    })
    isActive:boolean
-
+   @Column({
+       type:"simple-json",
+       nullable:true
+   })
+   additionalInfo :{
+       age:number,
+       hairColor:string
+   }
+   @Column()
+   familyMembers:string[]
    
+
+
 
 
 

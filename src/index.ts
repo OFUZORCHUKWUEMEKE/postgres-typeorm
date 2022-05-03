@@ -1,5 +1,11 @@
 import { DataSource} from 'typeorm'
+import { Banker } from './Entitites/Banker'
 import { Client } from './Entitites/Client'
+import { Transactions } from './Entitites/Transactions'
+import express from 'express'
+import { ClientRouter } from './routes/Client'
+
+const app = express()
 
 
 const AppDataSource = new DataSource({
@@ -9,14 +15,18 @@ const AppDataSource = new DataSource({
     username: "postgres",
     password: "ofuzor2001",
     database: "test",
-    entities:[Client], 
-    // entities: [Photo],
+    entities:[Client,Banker,Transactions], 
     synchronize: true 
-    // logging: false,
 })
 
 AppDataSource.initialize()
     .then(() => {
+        app.listen(8080,()=>{
+            console.log('app listening on Port 8080')
+        })
+        
+        app.use(express.json())
+        app.use(ClientRouter)
         // here you can start to work with your database
         console.log('database running on port 2000')
     })
